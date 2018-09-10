@@ -9,11 +9,17 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import com.example.sleuth.echo.EchoHandler;
+import com.example.sleuth.mongo.UserHandler;
 
 @Configuration
 public class Router {
     @Bean
-    public RouterFunction<ServerResponse> monoRouterFunction(EchoHandler echoHandler) {
+    public RouterFunction<ServerResponse> echoRouter(EchoHandler echoHandler) {
         return route(POST("/echo"), echoHandler::echo);
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> userRouter(UserHandler userHandler) {
+        return route(POST("/user"), userHandler::save);
     }
 }
